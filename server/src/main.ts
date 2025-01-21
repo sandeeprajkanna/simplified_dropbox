@@ -1,5 +1,6 @@
 import * as express from "express";
 import Config from "./config";
+import Database from "./db";
 
 class Server {
     readonly express: express.Application;
@@ -12,6 +13,13 @@ class Server {
 
     public async init(): Promise<void> {
         this.applyProcessLevelHandlers();
+        /**
+         * @note - all routes or db related files should be required after db init as, models are initialised only after this.
+         * sequelize initialised by Database.init
+         * All models use the above instance
+         */
+        // await Redis.init();
+        await Database.waitForConnection();
         this.mountRoutes();
         this.express.listen(this.port, () => {
             console.log("Server listening on " + this.port);
@@ -41,6 +49,7 @@ class Server {
             this.express.use("/", routes.router);
         });
     }
+
 }
 
 
