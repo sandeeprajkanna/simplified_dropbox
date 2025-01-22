@@ -2,15 +2,13 @@ import React from "react";
 import { downloadFile } from "../services/fileDownloadService";
 
 export default function Table({ files }) {
-  
-    const handleDownload = async (fileName, actionType) => {
-        try {
-          await downloadFile(fileName, actionType);
-          // alert(`${fileName} downloaded successfully.`);
-        } catch (error) {
-          alert(`Failed to download ${fileName}. Please try again.`);
-        }
-      };
+  const handleDownload = async (fileName, actionType) => {
+    try {
+      await downloadFile(fileName, actionType);
+    } catch (error) {
+      alert(`Failed to download ${fileName}. Please try again.`);
+    }
+  };
 
   return (
     <div className="container mt-4">

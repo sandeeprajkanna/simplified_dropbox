@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { uploadFile } from "../services/fileUploadService";
 
 export default function UploadBar({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -18,6 +19,8 @@ export default function UploadBar({ onUploadSuccess }) {
       const result = await uploadFile(file);
       console.log(result);
       alert(`File uploaded successfully: ${result.data._name}`);
+      setFile(null);
+      fileInputRef.current.value = null; 
       onUploadSuccess();
     } catch (error) {
       alert("Failed to upload the file. Please try again.");
@@ -30,7 +33,8 @@ export default function UploadBar({ onUploadSuccess }) {
         type="file"
         className="form-control mb-2"
         onChange={handleFileChange}
-        accept="*"
+        accept=".jpg, .jpeg, .png, .pdf, .json, .txt"
+        ref={fileInputRef} 
       />
       <button className="btn btn-primary" type="button" onClick={handleUpload}>
         Upload File
