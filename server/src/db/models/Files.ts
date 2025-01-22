@@ -5,17 +5,19 @@ export interface IFile {
     _name?: string;
     size?: number;
     fileType?: string;
+    user?: string;
     path?: string;
-    schemaVersion?: number,
+    schemaVersion?: number;
     updatedAt?: Date;
 }
 
 export const FileSchema = new Schema<IFile>({
     uuid: String,
     // base64 string
-    _name: String,
+    _name: {type: String, unique: true},
     size: Number,
     fileType: String,
+    user: String,
     path: String,
     schemaVersion: {
         type: Number,

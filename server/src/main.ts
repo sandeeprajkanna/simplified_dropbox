@@ -1,14 +1,30 @@
 import * as express from "express";
 import Config from "./config";
 import Database from "./db";
+import cors from "cors";
 
 class Server {
     readonly express: express.Application;
     readonly port: string;
 
+    options: cors.CorsOptions = {
+        allowedHeaders: [
+            "Origin",
+            "X-Requested-With",
+            "Content-Type",
+            "Accept",
+            "X-Access-Token"
+        ],
+        credentials: true,
+        methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+        origin: process.env.API_URL,
+        preflightContinue: false,
+    };
+
     constructor() {
         this.express = express.default();
         this.port = Config.PORT || "8005";
+        this.express.use(cors(this.options));
     }
 
     public async init(): Promise<void> {
