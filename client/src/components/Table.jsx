@@ -34,7 +34,7 @@ export default function Table({ files }) {
                 <td>
                   <a
                     href={file.url}
-                    className="btn btn-success btn-sm me-2"
+                    className="btn btn-primary btn-sm me-2"
                     onClick={() => handleDownload(file._name, "view")}
                   >
                     View

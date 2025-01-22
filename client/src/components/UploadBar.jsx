@@ -18,10 +18,15 @@ export default function UploadBar({ onUploadSuccess }) {
     try {
       const result = await uploadFile(file);
       console.log(result);
-      alert(`File uploaded successfully: ${result.data._name}`);
+      if(result.success) {
+        alert(`File uploaded successfully: ${result.data._name}`);
+        onUploadSuccess();
+      }
+      else {
+        alert(`Error in uploading file: ${result.type}`);
+      }
       setFile(null);
-      fileInputRef.current.value = null; 
-      onUploadSuccess();
+      fileInputRef.current.value = null;
     } catch (error) {
       alert("Failed to upload the file. Please try again.");
     }

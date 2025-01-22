@@ -9,7 +9,7 @@ export const uploadFile = async (file) => {
     const response = await apiClient.post("/upload", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    
+  
     return response.data;
   } catch (error) {
     console.error("Error uploading file:", error);

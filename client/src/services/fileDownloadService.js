@@ -8,6 +8,27 @@ export const downloadFile = async (fileName, actionType) => {
 
     const contentType = response.headers["content-type"];
 
+    if (contentType && contentType.includes("application/json")) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const errorResponse = JSON.parse(reader.result);
+          console.log("Error Response:", errorResponse);
+          console.error("Error from server:", errorResponse.success, errorResponse.type);
+          alert(`Error: ${errorResponse.type}`);
+        } catch (err) {
+          console.error("Failed to parse error response as JSON:", err);
+          alert("An unknown error occurred.");
+        }
+      };
+      reader.onerror = () => {
+        console.error("Error reading the response blob.");
+        alert("An error occurred while processing the server response.");
+      };
+      reader.readAsText(response.data);
+      return;
+    }
+    
     const fileBlob = new Blob([response.data], { type: contentType });
     const fileURL = window.URL.createObjectURL(fileBlob);
 

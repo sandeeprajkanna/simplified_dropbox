@@ -43,3 +43,4 @@ In `server` folder, Use following commands for various tasks -
 - Run `npm run debug` to start the server in debug mode
 - Run `npm run tslint` to run the linting
 
+![alt text](image.png)

@@ -11,8 +11,13 @@ export default function App() {
   const loadFiles = async () => {
     try {
       const fileList = await fetchFiles();
-      console.log(fileList.data);
-      setFiles(fileList.data);
+      console.log(fileList);
+      if(fileList.success) {
+        setFiles(fileList.data);
+      }
+      else {
+        alert(`Error in fetching fileList: ${fileList.type}`);
+      }
     } catch (error) {
       alert("Failed to fetch files. Please try again later.");
     }
