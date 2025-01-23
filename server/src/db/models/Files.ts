@@ -7,6 +7,7 @@ export interface IFile {
     fileType?: string;
     user?: string;
     path?: string;
+    storageType?: string;
     schemaVersion?: number;
     updatedAt?: Date;
 }
@@ -19,6 +20,7 @@ export const FileSchema = new Schema<IFile>({
     fileType: String,
     user: String,
     path: String,
+    storageType: String,
     schemaVersion: {
         type: Number,
         default: 0

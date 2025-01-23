@@ -20,6 +20,7 @@ export default function Table({ files }) {
             <th scope="col">File Name</th>
             <th scope="col">Uploaded On</th>
             <th scope="col">User</th>
+            <th scope="col">Stored In</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -31,6 +32,7 @@ export default function Table({ files }) {
                 <td>{file._name}</td>
                 <td>{file.updatedAt}</td>
                 <td>{file.user}</td>
+                <td>{file.storageType}</td>
                 <td>
                   <a
                     href={file.url}

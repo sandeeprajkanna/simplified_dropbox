@@ -16,7 +16,7 @@ export default function App() {
         setFiles(fileList.data);
       }
       else {
-        alert(`Error in fetching fileList: ${fileList.type}`);
+        alert(`Server failed to fetch fileList: ${fileList.type}`);
       }
     } catch (error) {
       alert("Failed to fetch files. Please try again later.");
